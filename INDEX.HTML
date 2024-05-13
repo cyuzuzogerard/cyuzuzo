@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+  body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  font-weight: 100;
+  background-image: -moz-radial-gradient(left, #15006b76 right, #6b70ac);
+  background-color: antiquewhite;
+  box-shadow: rgb(33, 216, 118);
+}
+
+.container {
+  margin-top: 50px;
+}
+
+h1 {
+  color: #080708;
+  box-shadow: #b721b7;
+}
+
+#message {
+  margin-top: 20px;
+  font-size: large;
+  color: aqua;
+  text-shadow: #080708;
+}
+
+#attempts {
+  margin-top: 10px;
+}
+#button{
+  font-family: 'Courier New', Courier, monospace;
+  font-style: oblique;
+  text-shadow: #6b70ac;
+  background-color: #080708;
+  background-image: -moz-linear-gradient(left, pink right, violet);
+}
+
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guessing Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1> ---- the game----</h1>
+    <p>Guess a number between 1 and 10:</p>
+    <input type="number" id="guessInput">
+    <button id="guessButton">start</button>
+    <div id="message"></div>
+    <div id="attempts"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Generate a random number between 1 and 100
+const randomNumber = Math.floor(Math.random() * 10) + 1;
+
+// Get DOM elements
+const guessInput = document.getElementById('guessInput');
+const guessButton = document.getElementById('guessButton');
+const message = document.getElementById('message');
+const attemptsDisplay = document.getElementById('attempts');
+
+let attempts = 0;
+
+// Function to compare the guessed number with the random number
+function checkGuess() {
+  const userGuess = parseInt(guessInput.value);
+
+  if (userGuess === randomNumber) {
+    message.textContent = `Congratulations! You guessed the number ${randomNumber} correctly in ${attempts} attempts.`;
+    message.style.color = 'green';
+    guessInput.disabled = true;
+    guessButton.disabled = true;
+  } else if (userGuess < randomNumber) {
+    message.textContent = 'Too low, try again.';
+    message.style.color = 'red';
+    attempts++;
+  } else {
+    message.textContent = 'Too high, try again.';
+    message.style.color = 'red';
+    attempts++;
+  }
+
+  attemptsDisplay.textContent = `Attempts: ${attempts}`;
+}
+
+// Event listener for the guess button
+guessButton.addEventListener('click', checkGuess);
+
+  </script>
+</body>
+</html>
